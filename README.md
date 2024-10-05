@@ -13,3 +13,23 @@ IUST AI Toolkit is a comprehensive collection of AI-related tools and utilities 
 ## Installation
 
 You can install the IUST AI Toolkit using pip:
+
+```bash
+pip install iust_ai_toolkit
+```
+
+## Usage
+
+```python
+from iust_ai_toolkit import decision_tree_submission
+
+decision_tree_submission()
+```
+
+## Contributing
+
+We welcome contributions to the IUST AI Toolkit! If you have any suggestions or improvements, please feel free to submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
