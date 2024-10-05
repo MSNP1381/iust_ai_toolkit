@@ -66,8 +66,8 @@ ensure_newline_before_comments = true
 
 [tool.ruff]
 line-length = 100
-select = ["E", "F", "I", "C", "B"]
-ignore = ["E203", "E266", "E501", "B950"]
+lint.select = ["E", "F", "I"]
+lint.ignore = ["E203", "E266", "E501"]
 exclude = [
     ".bzr",
     ".direnv",
@@ -88,6 +88,7 @@ exclude = [
     "dist",
     "node_modules",
     "venv",
+    "__init__.py",
 ]
 
 [tool.mypy]
