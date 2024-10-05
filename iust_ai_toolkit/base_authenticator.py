@@ -1,13 +1,13 @@
 import base64
 import json
-import csv
+import pandas as pd
 import os
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 class BaseAuthenticator:
-    def __init__(self, base_dir: str = "iust-ai"):
-        self.base_dir = base_dir
-        os.makedirs(base_dir, exist_ok=True)
+    def __init__(self, base_dir: str = None):
+        self.base_dir = os.path.abspath(base_dir) if base_dir else os.getcwd()
+        os.makedirs(self.base_dir, exist_ok=True)
 
     def encode_notebook(self, notebook_path: str) -> Dict[str, Any]:
         with open(notebook_path, 'r') as f:
@@ -37,13 +37,11 @@ class BaseAuthenticator:
             'estimations': estimations
         }
 
-    def create_submission_csv(self, data: Dict[str, Any], csv_path: str):
-        with open(csv_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(['Type', 'Value'])
+    def create_submission_csv(self, predictions: List):
+
             
-            for method in data['implemented_methods']:
-                writer.writerow(['Method', method])
-            
-            for key, value in data['estimations'].items():
-                writer.writerow(['Estimation', f"{key}: {value}"])
+        
+        df = pd.DataFrame()
+        df.id= list(range(1, len(predictions)+1))
+        df.prediction= predictions
+        df.to_csv('./submission.csv', index=False)
