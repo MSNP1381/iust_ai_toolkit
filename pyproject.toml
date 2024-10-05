@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "iust_ai"
-version = "0.1.0"
-description = "A library for authenticating AI course submissions at IUST"
+name = "iust_ai_toolkit"
+version = "0.1.2"
+description = "A Toolkit for AI course submissions at IUST"
 authors = ["MSNP <mohamadnematpoor@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/MSNP/iust_ai"
-repository = "https://github.com/MSNP/iust_ai"
+homepage = "https://github.com/MSNP/iust_ai_toolkit"
+repository = "https://github.com/MSNP/iust_ai_toolkit"
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
