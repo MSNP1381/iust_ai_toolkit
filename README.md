@@ -36,6 +36,31 @@ submit_notebook("YOUR_STUDENT_ID", "./path/to/your/notebook.ipynb")
 
 ```
 
+### Using the Course Module
+
+You can also use the `course_module` function to dynamically import modules:
+
+```python
+from iust_ai_toolkit import course_module
+ai_4031 = course_module("abdi_4031.decision_tree_submission")
+ai_4031.submit_notebook("YOUR_STUDENT_ID", "./path/to/your/notebook.ipynb")
+```
+
+### Listing Courses and Assignments
+
+The IUST AI Toolkit CLI provides commands to list available courses and assignments:
+
+- **List Available Courses**:
+
+  ```bash
+  iust-ai list-courses
+  ```
+
+- **List Assignments for a Specific Course**:
+  ```bash
+  iust-ai list-assignments --course abdi_4031
+  ```
+
 ### Command Line Interface
 
 The IUST AI Toolkit provides a command-line interface for easy submission of assignments and comparison of multiple submissions. After installation, you can use the `iust-ai` command:

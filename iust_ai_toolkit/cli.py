@@ -1,16 +1,40 @@
 import csv
 import json
 import os
+import pkgutil
 
 import click
 
-from .abdi_4031.decision_tree_submission import DecisionTreeSubmission, submit_notebook
+from iust_ai_toolkit.abdi_4031 import DecisionTreeSubmission, submit_notebook
 
 
 @click.group()
 def main():
     """IUST AI Toolkit CLI"""
     pass
+
+
+@main.command()
+def list_courses():
+    """List available courses (modules) in the IUST AI Toolkit."""
+    courses = [name for _, name, is_pkg in pkgutil.iter_modules(["iust_ai_toolkit"]) if is_pkg]
+    click.echo("Available Courses:")
+    for course in courses:
+        click.echo(f"- {course}")
+
+
+@main.command()
+@click.option("--course", required=True, help="Course name to list assignments for")
+def list_assignments(course):
+    """List assignments for a specific course."""
+    try:
+        module = __import__(f"iust_ai_toolkit.{course}", fromlist=[""])
+        assignments = [name for _, name, is_pkg in pkgutil.iter_modules(module.__path__) if is_pkg]
+        click.echo(f"Assignments for {course}:")
+        for assignment in assignments:
+            click.echo(f"- {assignment}")
+    except ImportError:
+        click.secho(f"Error: Course '{course}' not found.", fg="red", bold=True)
 
 
 @main.command()
