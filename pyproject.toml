@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iust_ai_toolkit"
-version = "0.0.3"
+version = "0.0.2"
 description = "A Toolkit for AI course submissions at IUST"
 authors = ["MSNP <mohamadnematpoor@gmail.com>"]
 license = "MIT"
