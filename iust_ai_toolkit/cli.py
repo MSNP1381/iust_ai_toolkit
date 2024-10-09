@@ -4,7 +4,7 @@ import os
 
 import click
 
-from .abdi_4031.decision_tree_submission import DecisionTreeAuthenticator, authenticate_notebook
+from .abdi_4031.decision_tree_submission import DecisionTreeSubmission, authenticate_notebook
 
 
 @click.group()
@@ -33,7 +33,7 @@ def submit(student_id, notebook_path, project):
 @click.option("--verbose", is_flag=True, help="Generate verbose output")
 def compare_submissions(directory, output, verbose):
     """Compare multiple submissions and generate a report"""
-    if not DecisionTreeAuthenticator.is_ta_version_installed():
+    if not DecisionTreeSubmission.is_ta_version_installed():
         click.secho(
             "Error: TA version is not installed. Please install iust_ai_toolkit[ta] to use this feature.",
             fg="red",
@@ -41,7 +41,7 @@ def compare_submissions(directory, output, verbose):
         )
         return
 
-    authenticator = DecisionTreeAuthenticator(directory)
+    authenticator = DecisionTreeSubmission(directory)
     submissions = [f for f in os.listdir(directory) if f.endswith("-decision_tree_submission.zip")]
 
     click.secho(f"Found {len(submissions)} submissions to compare.", fg="cyan")

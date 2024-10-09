@@ -1,1 +1,1 @@
-from .decision_tree_submission import DecisionTreeAuthenticator, authenticate_notebook
+from .decision_tree_submission import DecisionTreeSubmission, authenticate_notebook

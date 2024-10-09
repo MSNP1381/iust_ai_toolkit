@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple
 from ...base_authenticator import BaseAuthenticator, is_library_installed
 
 
-class DecisionTreeAuthenticator(BaseAuthenticator):
+class DecisionTreeSubmission(BaseAuthenticator):
     def __init__(self, base_dir: str = None):
         super().__init__(base_dir)
 
@@ -16,9 +16,10 @@ class DecisionTreeAuthenticator(BaseAuthenticator):
         )
 
     def create_submission_zip(self, student_id: str, notebook_path: str):
+        notebook_name = os.path.basename(notebook_path)
         encoded_data = self.encode_notebook(notebook_path)
 
-        zip_path = os.path.join(self.base_dir, f"{student_id}-decision_tree_submission.zip")
+        zip_path = os.path.join(self.base_dir, f"{notebook_name}_{student_id}-decision_tree.zip")
         with zipfile.ZipFile(zip_path, "w") as zipf:
             # Add the original notebook
             zipf.write(notebook_path, os.path.basename(notebook_path))
@@ -27,12 +28,15 @@ class DecisionTreeAuthenticator(BaseAuthenticator):
             encoded_notebook_json = json.dumps(encoded_data)
             zipf.writestr("encoded_notebook.json", encoded_notebook_json)
 
-            # Add submission CSV
-            csv_path = os.path.join(os.path.dirname(notebook_path), "submission.csv")
-            if os.path.exists(csv_path):
-                zipf.write(csv_path, "submission.csv")
-            else:
-                raise FileNotFoundError(f"Warning: submission.csv not found at {csv_path}")
+            # Add questions.docx
+            questions_path = os.path.join(self.base_dir, "..", "questions.docx")
+            if os.path.exists(questions_path):
+                zipf.write(questions_path, "questions.docx")
+
+            # Add d.py
+            d_path = os.path.join(self.base_dir, "..", "decision_tree.py")
+            if os.path.exists(d_path):
+                zipf.write(d_path, "decision_tree.py")
 
         print(
             f"Submission for {student_id} (decision_tree_submission) saved successfully as {zip_path}"
@@ -167,5 +171,5 @@ class DecisionTreeAuthenticator(BaseAuthenticator):
 
 
 def authenticate_notebook(student_id: str, notebook_path: str = "./main.ipynb"):
-    authenticator = DecisionTreeAuthenticator()
+    authenticator = DecisionTreeSubmission()
     authenticator.create_submission_zip(student_id, notebook_path)
