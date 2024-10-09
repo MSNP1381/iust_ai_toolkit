@@ -170,6 +170,6 @@ class DecisionTreeSubmission(BaseAuthenticator):
         return results, verbose_results, ignore_cheating
 
 
-def authenticate_notebook(student_id: str, notebook_path: str = "./main.ipynb"):
+def submit_notebook(student_id: str, notebook_path: str = "./main.ipynb"):
     authenticator = DecisionTreeSubmission()
     authenticator.create_submission_zip(student_id, notebook_path)

@@ -4,7 +4,7 @@ import os
 
 import click
 
-from .abdi_4031.decision_tree_submission import DecisionTreeSubmission, authenticate_notebook
+from .abdi_4031.decision_tree_submission import DecisionTreeSubmission, submit_notebook
 
 
 @click.group()
@@ -21,7 +21,7 @@ def submit(student_id, notebook_path, project):
     """Submit an assignment"""
     click.echo(f"Submitting {project} assignment for student {student_id}")
     if project == "decision-tree":
-        authenticate_notebook(student_id, notebook_path)
+        submit_notebook(student_id, notebook_path)
     else:
         click.echo(f"Project {project} is not supported yet.")
     click.echo("Submission complete!")
